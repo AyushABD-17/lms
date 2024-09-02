@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            border-radius: 8px 8px 0 0;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .order-details {
+            margin-top: 20px;
+        }
+        .order-details th, .order-details td {
+            padding: 10px;
+            text-align: left;
+        }
+        .order-details th {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #888888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Order Confirmation</h1>
+        </div>
+        <div class="content">
+            <p>Dear <%= customerName %>,</p>
+            <p>Thank you for your order! We are pleased to confirm your order as follows:</p>
+            <div class="order-details">
+                <h3>Order Details</h3>
+                <table width="100%">
+                    <tr>
+                        <th>Order Name:</th>
+                        <td><%= order.name %></td>
+                    </tr>
+                    <tr>
+                        <th>Order price:</th>
+                        <td><%= order.price %></td>
+                    </tr>
+                    <tr>
+                        <th>Total Amount:</th>
+                        <td>$<%= order.price %></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="items">
+                <h3>Items</h3>
+                <table width="100%" border="1" cellspacing="0" cellpadding="10">
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% items.forEach(item => { %>
+                            <tr>
+                                <td><%= item.name %></td>
+                                <td><%= item.quantity %></td>
+                                <td>$<%= item.price %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="footer">
+            <p>If you have any questions about your order, feel free to contact us at support@example.com.</p>
+            <p>Thank you for shopping with us!</p>
+        </div>
+    </div>
+</body>
+</html>
