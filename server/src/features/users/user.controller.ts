@@ -1,24 +1,24 @@
 require("dotenv").config();
-import ErrorHandler from "../utils/ErrorHandler";
-import { CatchAsyncError } from "../middleware/catchAsyncError";
+import ErrorHandler from "../../core/utils/ErrorHandler";
+import { CatchAsyncError } from "../../core/middleware/catchAsyncError";
 import { NextFunction, Request, Response } from "express";
-import userModel, { IUser } from "../models/user.model";
+import userModel, { IUser } from "./user.model";
 import jwt, { JwtPayload, Secret } from "jsonwebtoken";
 import ejs from "ejs";
 import path from "path";
-import sendMail from "../utils/sendMail";
+import sendMail from "../../core/utils/sendMail";
 import {
   sendToken,
   accessTokenOptions,
   refreshTokenOptions,
-} from "../utils/jwt";
-import { redis } from "../utils/redis";
+} from "../../core/utils/jwt";
+import { redis } from "../../core/utils/redis";
 import { decode } from "punycode";
 import {
   getAllUsersService,
   getUserById,
   userUpdateRoleService,
-} from "../services/user.service";
+} from "./user.service";
 import { send } from "process";
 import cloudinary from "cloudinary";
 

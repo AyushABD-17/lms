@@ -1,8 +1,8 @@
 import { Schema } from "mongoose";
 import { NextFunction, Request, Response } from "express";
-import { CatchAsyncError } from "../middleware/catchAsyncError";
-import NotificationModel from "../models/notificationModel";
-import ErrorHandler from "../utils/ErrorHandler";
+import { CatchAsyncError } from "../../core/middleware/catchAsyncError";
+import NotificationModel from "./notification.model";
+import ErrorHandler from "../../core/utils/ErrorHandler";
 import corn from "node-cron";
 
 export const getNotifications = CatchAsyncError(
@@ -15,7 +15,7 @@ export const getNotifications = CatchAsyncError(
         success: true,
         notifications,
       });
-    } catch (error: any) {}
+    } catch (error: any) { }
   }
 );
 

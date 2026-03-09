@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from "express";
-import { CatchAsyncError } from "../middleware/catchAsyncError";
-import ErrorHandler from "../utils/ErrorHandler";
-import OrderModel, { IOrder } from "../models/orderModel";
-import userModel from "../models/user.model";
-import CourseModel from "../models/course.model";
+import { CatchAsyncError } from "../../core/middleware/catchAsyncError";
+import ErrorHandler from "../../core/utils/ErrorHandler";
+import OrderModel, { IOrder } from "./order.model";
+import userModel from "../users/user.model";
+import CourseModel from "../courses/course.model";
 import path from "path";
 import ejs from "ejs";
-import sendMail from "../utils/sendMail";
-import NotificationModel from "../models/notificationModel";
-import { getAllOrdersService, newOrder } from "../services/order.service";
+import sendMail from "../../core/utils/sendMail";
+import NotificationModel from "../notifications/notification.model";
+import { getAllOrdersService, newOrder } from "./order.service";
 
 export const createOrder = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {

@@ -1,16 +1,16 @@
-import ErrorHandler from "../utils/ErrorHandler";
-import { CatchAsyncError } from "../middleware/catchAsyncError";
+import ErrorHandler from "../../core/utils/ErrorHandler";
+import { CatchAsyncError } from "../../core/middleware/catchAsyncError";
 import { NextFunction, Request, Response } from "express";
 import cloudinary from "cloudinary";
-import { createCourse, getAllCoursesService } from "../services/course.service";
-import CourseModel from "../models/course.model";
-import { redis } from "../utils/redis";
+import { createCourse, getAllCoursesService } from "./course.service";
+import CourseModel from "./course.model";
+import { redis } from "../../core/utils/redis";
 import mongoose from "mongoose";
 import ejs from "ejs";
 import path from "path";
-import sendMail from "../utils/sendMail";
+import sendMail from "../../core/utils/sendMail";
 import { request } from "http";
-import NotificationModel from "../models/notificationModel";
+import NotificationModel from "../notifications/notification.model";
 
 export const uploadCourse = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -83,7 +83,7 @@ export const getSingleCourse = CatchAsyncError(
         const course = await CourseModel.findById(req.params.id).select(
           "-courseData.videoUrl -courseData.suggestions -courseData.questions -courseData.links"
         );
-        await redis.set(courseId, JSON.stringify(course),"EX",604800);
+        await redis.set(courseId, JSON.stringify(course), "EX", 604800);
         res.status(201).json({
           success: true,
           course,

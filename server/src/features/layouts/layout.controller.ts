@@ -1,8 +1,8 @@
 import cloudinary from "cloudinary";
 import { NextFunction, Request, Response } from "express";
-import { CatchAsyncError } from "../middleware/catchAsyncError";
-import ErrorHandler from "../utils/ErrorHandler";
-import LayoutModel from "../models/layout.model";
+import { CatchAsyncError } from "../../core/middleware/catchAsyncError";
+import ErrorHandler from "../../core/utils/ErrorHandler";
+import LayoutModel from "./layout.model";
 
 export const createLayout = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -135,18 +135,18 @@ export const editLayout = CatchAsyncError(
 
 
 export const getLayoutByType = CatchAsyncError(
-    async (req: Request, res: Response, next: NextFunction) => {
-      try {
-        const {type } = req.body
-        const layout = await LayoutModel.findOne({type})
-        res.status(201).json({
-          success: true,
-          layout
-        });
-      } catch (error: any) {
-        return next(new ErrorHandler(error.message, 500));
-      }
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { type } = req.body
+      const layout = await LayoutModel.findOne({ type })
+      res.status(201).json({
+        success: true,
+        layout
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 500));
     }
-  );
+  }
+);
 
 

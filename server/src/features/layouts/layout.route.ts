@@ -1,10 +1,10 @@
 import express from "express";
-import { authorizeRoles, isAuthenticate } from "../middleware/auth";
+import { authorizeRoles, isAuthenticate } from "../../core/middleware/auth";
 import {
   createLayout,
   editLayout,
   getLayoutByType,
-} from "../controllers/layout.controller";
+} from "./layout.controller";
 
 const layoutRouter = express.Router();
 
@@ -22,7 +22,7 @@ layoutRouter.put(
 );
 layoutRouter.get(
   "/get-layout",
-  
+
   getLayoutByType
 );
 
